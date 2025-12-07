@@ -1,0 +1,9 @@
+# Ignorar ejecutables
+*.exe
+*.dll
+*.so
+*.dylib
+*.out
+*.o
+*.obj
+
