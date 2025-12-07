@@ -1,10 +1,12 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <sstream>
 #include <vector>
+#include <limits>
+#include <cmath>
 
-#define nBateries 2
+#define nBateries 12
+
 using namespace std;
 /* 
 He de implementar programació dinamica, 
@@ -12,42 +14,34 @@ una funcio que agafe tota la string,
 i que vaja comprobant cada parella de números
 pa vore quin es més gran
 */
-int inf = numeric_limits<int>::min();
 
-int maxBat(string &l1, int i, int j, vector <vector<int> > &memo){
+long inf = numeric_limits<long>::min();
+
+long maxBat(string &l1, int i, int j, vector <vector<long> > &memo, const vector <long> &potencies10){
 	// casos base
-    if (j == 2) {return 0;}
-	else if(i >= l1.size()) {return -inf;}
+    if (j == 12) {return 0;}
+	else if(i >= l1.size()) {return inf;}
     else if (memo[i][j] != -1) {return memo[i][j];}
     
 	// casos general + memoria
-    if (j == 0) // Decenes
-    {
-        // Agafar el numero o no
-        memo[i][j] = max(maxBat(l1, i + 1, j, memo), ((l1[i] - '0') * 10) + maxBat(l1, i + 1, j + 1, memo));
-        return memo[i][j];
-    }
-    else if (j == 1) // Unitats
-    {
-        // Agafar el numero o no
-        memo[i][j] = max(maxBat(l1, i + 1, j, memo), (l1[i] - '0')+ maxBat(l1, i + 1, j + 1, memo));
-        return memo[i][j];
-    }
-    
-	return 0;
+    // Agafar el numero o no
+    long nDigitos = potencies10[11 - j];
+    memo[i][j] = max(maxBat(l1, i + 1, j, memo, potencies10), ((l1[i] - '0') * nDigitos)+ maxBat(l1, i + 1, j + 1, memo, potencies10));
+    return memo[i][j];
 }
 
 int main(int argc, char const *argv[])
 {
     ifstream fich("input.txt");
     string l1;
-    int count = 0;
-
+    long count = 0;
+    const vector <long> potencies = {1,10,100,1000,10000,100000,1000000,10000000,100000000,1000000000,10000000000,100000000000};
+    
     while (getline(fich, l1))
     {
         int estadoBusqueda = 0;
-        vector <vector<int> > memo(l1.size(),vector<int>(nBateries + 1,-1));
-        count += maxBat(l1, 0, estadoBusqueda, memo);
+        vector <vector<long> > memo(l1.size(),vector<long>(nBateries + 1,-1));
+        count += maxBat(l1, 0, estadoBusqueda, memo, potencies);
     }
     cout << count << endl;
     fich.close();

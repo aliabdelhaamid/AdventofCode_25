@@ -6,10 +6,6 @@
 
 using namespace std;
 
-int maxBat(string &l1, int i, int j, vector <vector<int> > &memo){
-
-}
-
 int main(int argc, char const *argv[])
 {
     ifstream fich("input.txt");
