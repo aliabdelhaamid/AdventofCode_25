@@ -8,12 +8,10 @@ using namespace std;
 
 class Node
 {
-    friend class Cafeteria;
-private:
+public:
     Node *next;
     ull desde;
     ull hasta;
-public:
     Node(ull desde, ull hasta, Node *next = nullptr){
         this->desde = desde;
         this->hasta = hasta;
@@ -47,10 +45,10 @@ public:
 
     void sort() // de menor a mayor teniendo en cuenta ull desde
     {
-        bool swapHecho = true;
-		while(swapHecho){
+        bool swapFet = true;
+		while(swapFet){
             Node *aux = raiz;       
-            swapHecho = false;
+            swapFet = false;
 
             while (aux->next != nullptr)
             {
@@ -63,7 +61,7 @@ public:
                     ull temp2 = aux->next->hasta;
                     aux->next->hasta = aux->hasta;
                     aux->hasta = temp2;
-                    swapHecho = true;
+                    swapFet = true;
                 }
                 aux = aux->next;
             }
@@ -91,12 +89,12 @@ public:
         
     }
 
-    void sumar(ull *count){
+    void sumar(ull &count){
         Node *aux = raiz;
 
         while (aux != nullptr)
         {
-            *count += (aux->hasta - aux->desde) + 1;
+            count += (aux->hasta - aux->desde) + 1;
             aux = aux->next;
         }
         
@@ -129,7 +127,7 @@ int main(int argc, char const *argv[])
     }
     cafe->sort();
     cafe->mirarRangos();
-    cafe->sumar(&count);
+    cafe->sumar(count);
 
     delete cafe;
     cout << count << endl;

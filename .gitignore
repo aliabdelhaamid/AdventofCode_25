@@ -1,9 +1,13 @@
-# Ignorar ejecutables
+.DS_Store
+.vscode/
+# Ignorar ejecutables y binarios
 *.exe
+*.out
+*.bin
+*.o
 *.dll
 *.so
 *.dylib
-*.out
-*.o
-*.obj
-
+# Archivos temporales
+*.tmp
+*.log

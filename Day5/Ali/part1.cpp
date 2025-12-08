@@ -10,12 +10,10 @@ using namespace std;
 
 class Node
 {
-    friend class Cafeteria;
-private:
+public:
     Node *next;
     ull desde;
     ull hasta;
-public:
     Node(ull desde, ull hasta, Node *next = nullptr){
         this->desde = desde;
         this->hasta = hasta;
