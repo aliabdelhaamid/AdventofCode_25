@@ -13,11 +13,13 @@
 #include <sstream>
 #include <queue>
 #include <tuple>
-#include <algorithm>
-#include <functional>
+#include <random>
 
 using namespace std;
 typedef long long ll;
+
+random_device rd;  // Objeto para generar semillas aleatorias
+mt19937 gen(rd()); // Generador de números aleatorios Mersenne Twister
 
 struct Puntos3D // Per a juntar les coordenades
 {
@@ -73,6 +75,34 @@ public:
         return tamano[find(a)];
     }
 };
+
+void asc_quick_sort(vector<int> &vec)
+{
+    if (vec.size() <= 1)
+        return;
+
+    uniform_int_distribution<> dis(0, (int)vec.size() - 1); // índice válido
+    int pivot = vec[dis(gen)];
+
+    vector<int> izq, medio, der;
+    for (int num : vec)
+    {
+        if (num > pivot)
+            izq.push_back(num); // mayores primero
+        else if (num == pivot)
+            medio.push_back(num);
+        else
+            der.push_back(num); // menores después
+    }
+
+    asc_quick_sort(izq);
+    asc_quick_sort(der);
+
+    vec.clear();
+    vec.insert(vec.end(), izq.begin(), izq.end());
+    vec.insert(vec.end(), medio.begin(), medio.end());
+    vec.insert(vec.end(), der.begin(), der.end());
+}
 
 ll calcularDistancia(const Puntos3D &a, const Puntos3D &b) // Calcular la distancia euclidiana que diu el problema
 {
@@ -146,8 +176,8 @@ int main(void)
             tamanyos.push_back(dsu.size(i)); // Afegim el tamany del conjunt
         }
     }
-    sort(tamanyos.rbegin(), tamanyos.rend()); // Ordenem de major a menor els tamanys (sort(tamanos.begin(), tamanos.end(), greater<int>());)
-    ll resultado = 1;                         // Variable per a guardar el resultat de la multiplicacion. ll per si acar que ya no me fie de res y menys dels int.
+    asc_quick_sort(tamanyos); // Ordenem de major a menor els tamanys (sort(tamanos.begin(), tamanos.end(), greater<int>());)
+    ll resultado = 1;         // Variable per a guardar el resultat de la multiplicacion. ll per si acar que ya no me fie de res y menys dels int.
 
     for (int i = 0; i < 3; ++i)
     {
