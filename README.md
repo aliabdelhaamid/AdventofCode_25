@@ -9,20 +9,34 @@ Repositorio para subir los códigos y las explicaciones de los problemas del Adv
   - Dani Dunca
   - Ali Abdelhamid
   - Andreu García
+    
 ---
 ## Entregables del proyecto
-Posar aci els problemes a entregar
+Dia 3. parte2: Uso de Stack y Algortimo Voraz (Greedy).
+
+Dia 3 (Ali): Programación dinámica maximizando el resultado (Ambas partes, corrige el que quieras).
+
+Dia 4: Archivo "Dia4Completo.cpp": Uso de grafos para contar cuantos vecinos tiene.
+
+Dia 5 (Ali): Uso de LinkedList (Ambas partes, corrige el que quieras).
+
+Dia 7, parte 2: Uso de Programacion dinamica para evitar recalcular subproblemas superpuestos.
+
+Dia 8: (Ambas partes, corrige el que quieras) Uso de DyV para implementar algoritmos de ordenacion como QuickSort, uso de estructurad de datos como Priority_Queue y uso de DSU (Disjoint Set Union) para crear los conjuntos (conexiones) y saber a que conjunto pertenece cada "conexion".
   
 ---
 
 ## Estructuras de datos y Algoritmos usados hasta el momento
   - `Programación Dinámica`
+  - `Divide y Venceras`
   - `ListLinked`
   - `QuickSort`
   - `BubbleSort`
   - `DSU`
   - `Algoritmos voraces (greedy)`
   - `Priority queues`
+  - `Min-Heap`
+  - `Grafos`
 ---
 
 ## Estructura del proyecto
@@ -63,6 +77,7 @@ AOC25/
 │  ├─ README.md
 │  ├─ part1.cpp
 │  ├─ part2.cpp
+│  ├─ Dia4Completo.cpp
 │  ├─ input.txt
 │  └─ Ali/
 │     ├─ README.md
@@ -99,6 +114,12 @@ AOC25/
 │     ├─ part1.cpp
 │     ├─ part2.cpp
 │     └─ input.txt
+├─ Dia8/
+│  ├─ README.md
+│  ├─ part1.cpp
+│  ├─ part2.cpp
+│  └─ input.txt
+│
 └─ README.md
 ```
 
