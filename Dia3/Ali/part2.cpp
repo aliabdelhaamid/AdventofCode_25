@@ -15,9 +15,10 @@ i que vaja comprobant cada parella de números
 pa vore quin es més gran
 */
 
+const vector <long> potencies = {1, 10, 100, 1000, 10000, 100000, 1000000, 10000000, 100000000, 1000000000, 10000000000, 100000000000};  
 long inf = numeric_limits<long>::min();
 
-long maxBat(string &l1, int i, int j, vector <vector<long> > &memo, const vector <long> &potencies10){
+long maxBat(string &l1, int i, int j, vector <vector<long> > &memo){
 	// casos base
     if (j == 12) {return 0;}
 	else if(i >= l1.size()) {return inf;}
@@ -25,8 +26,8 @@ long maxBat(string &l1, int i, int j, vector <vector<long> > &memo, const vector
     
 	// casos general + memoria
     // Agafar el numero o no
-    long nDigitos = potencies10[11 - j];
-    memo[i][j] = max(maxBat(l1, i + 1, j, memo, potencies10), ((l1[i] - '0') * nDigitos)+ maxBat(l1, i + 1, j + 1, memo, potencies10));
+    long nDigitos = potencies[11 - j];
+    memo[i][j] = max(maxBat(l1, i + 1, j, memo), ((l1[i] - '0') * nDigitos)+ maxBat(l1, i + 1, j + 1, memo));
     return memo[i][j];
 }
 
@@ -34,14 +35,12 @@ int main(int argc, char const *argv[])
 {
     ifstream fich("input.txt");
     string l1;
-    long count = 0;
-    const vector <long> potencies = {1,10,100,1000,10000,100000,1000000,10000000,100000000,1000000000,10000000000,100000000000};
-    
+    long count = 0;  
     while (getline(fich, l1))
     {
         int estadoBusqueda = 0;
         vector <vector<long> > memo(l1.size(),vector<long>(nBateries + 1,-1));
-        count += maxBat(l1, 0, estadoBusqueda, memo, potencies);
+        count += maxBat(l1, 0, estadoBusqueda, memo);
     }
     cout << count << endl;
     fich.close();
